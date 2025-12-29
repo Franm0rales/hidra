@@ -95,21 +95,36 @@
 
                 <div class="space-y-8">
                     <section class="bg-zinc-900 border border-zinc-800 p-6 rounded shadow-2xl">
-                        <h2 class="text-xl font-bold text-white border-b border-zinc-800 pb-2 mb-4 uppercase italic font-sans">Códigos Actuales</h2>
-                        <div class="space-y-3 font-mono">
-                            <div class="flex justify-between">
-                                <span class="text-zinc-500 text-xs">Puerta Principal:</span>
-                                <span class="text-red-400">[ 4592 ]</span>
-                            </div>
-                            <div class="flex justify-between">
-                                <span class="text-zinc-500 text-xs">Almacén Armas:</span>
-                                <span class="text-red-400">[ 1010 ]</span>
-                            </div>
-                            <div class="mt-4 pt-2 border-t border-zinc-800 flex justify-between">
-                                <span class="text-[10px] text-zinc-600 uppercase">Estado: Actualizado</span>
-                            </div>
-                        </div>
-                    </section>
+    <h2 class="text-xl font-bold text-white border-b border-zinc-800 pb-2 mb-4 uppercase italic font-sans">
+        Códigos Actuales
+    </h2>
+
+    <div class="space-y-3 font-mono">
+        <div class="flex justify-between items-center">
+            <span class="text-zinc-500 text-xs">Puerta Principal:</span>
+            <input
+                id="code-door"
+                type="text"
+                class="bg-transparent text-red-400 text-right w-24 outline-none border-b border-dashed border-red-700 focus:border-red-500"
+                value="[ 4592 ]">
+        </div>
+
+        <div class="flex justify-between items-center">
+            <span class="text-zinc-500 text-xs">Almacén Armas:</span>
+            <input
+                id="code-storage"
+                type="text"
+                class="bg-transparent text-red-400 text-right w-24 outline-none border-b border-dashed border-red-700 focus:border-red-500"
+                value="[ 1010 ]">
+        </div>
+
+        <div class="mt-4 pt-2 border-t border-zinc-800 flex justify-between">
+            <span class="text-[10px] text-zinc-600 uppercase">
+                Estado: Guardado Local
+            </span>
+        </div>
+    </div>
+</section>
 
                     <section class="bg-zinc-900 border border-zinc-800 p-6 rounded shadow-2xl">
                         <h2 class="text-xl font-bold text-white border-b border-zinc-800 pb-2 mb-4 uppercase italic font-sans text-xs">Miembros Activos</h2>
@@ -158,7 +173,23 @@
             }
         }, 700);
     </script>
+<script>
+    const door = document.getElementById('code-door');
+    const storage = document.getElementById('code-storage');
 
+    // Cargar códigos guardados
+    door.value = localStorage.getItem('hidra_door_code') || door.value;
+    storage.value = localStorage.getItem('hidra_storage_code') || storage.value;
+
+    // Guardar automáticamente al editar
+    door.addEventListener('input', () => {
+        localStorage.setItem('hidra_door_code', door.value);
+    });
+
+    storage.addEventListener('input', () => {
+        localStorage.setItem('hidra_storage_code', storage.value);
+    });
+</script>
     <style>
         @keyframes loading {
             0% { width: 0%; }
@@ -166,4 +197,5 @@
         }
     </style>
 </body>
+
 </html>
