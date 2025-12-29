@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hidra - DayZ</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        .dayz-bg {
+            background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(10, 10, 10, 1)), 
+                        url('https://images.unsplash.com/photo-1478720568477-152d9b164e26?q=80&w=2000&auto=format&fit=crop');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+        }
+
+        @keyframes neon-red {
+            0%, 100% { filter: drop-shadow(0 0 2px rgba(220, 38, 38, 0.8)); opacity: 1; }
+            50% { filter: drop-shadow(0 0 10px rgba(220, 38, 38, 1)); opacity: 0.8; }
+        }
+        .logo-nav {
+            animation: neon-red 2s infinite;
+            mix-blend-mode: screen;
+        }
+
+        .glass-panel {
+            background: rgba(15, 15, 15, 0.8);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .text-shadow {
+            text-shadow: 2px 2px 10px rgba(0,0,0,0.8);
+        }
+
+        /* Estilo para los vídeos */
+        .video-container {
+            position: relative;
+            padding-bottom: 56.25%;
+            height: 0;
+            overflow: hidden;
+            border: 1px solid rgba(220, 38, 38, 0.2);
+        }
+        .video-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+        /* Contenedor del Foro Trello */
+        .trello-frame {
+            width: 100%;
+            height: 600px;
+            border: none;
+            filter: invert(90%) hue-rotate(180deg) brightness(0.8); /* Truco para "oscurecer" Trello */
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body class="bg-[#050505] text-zinc-400 font-sans dayz-bg min-h-screen">
+
+    <nav class="bg-black/80 p-4 flex justify-between items-center sticky top-0 z-50 border-b border-white/5 backdrop-blur-md">
+        <div class="flex items-center space-x-3">
+            <img src="https://i.imgur.com/xq6uXTC.jpeg" alt="Hidra Logo" class="w-10 h-10 logo-nav">
+            <span class="text-xl font-black tracking-tighter text-white uppercase italic text-shadow">Hidra</span>
+        </div>
+        <div class="flex space-x-6 items-center">
+            <a href="#foro" class="text-[10px] uppercase tracking-[0.2em] hover:text-red-600 transition text-white">Foro</a>
+            <a href="#clips" class="text-[10px] uppercase tracking-[0.2em] hover:text-red-600 transition text-white">Clips</a>
+            <button onclick="entrarZonaHidra()" class="bg-red-800 hover:bg-red-700 text-white text-[10px] px-4 py-1.5 rounded-sm font-bold uppercase tracking-[0.2em] shadow-lg transition">
+                Zona Hidra
+            </button>
+        </div>
+    </nav>
+
+    <header class="h-[60vh] flex flex-col justify-center items-center text-center px-6">
+        <h2 class="text-5xl md:text-8xl font-black text-white tracking-tighter uppercase italic text-shadow mb-2">
+            Sobrevive
+        </h2>
+        <p class="text-red-700 font-mono tracking-[0.5em] text-sm md:text-lg bg-black/40 px-4 py-1">
+            SISTEMA DE COMUNICACIONES HIDRA
+        </p>
+    </header>
+
+    <main class="container mx-auto px-6 py-12 relative z-10">
+        
+        <section id="clips" class="max-w-5xl mx-auto mb-24">
+            <div class="flex items-center space-x-4 mb-8">
+                <div class="h-[1px] flex-grow bg-red-900/50"></div>
+                <h3 class="text-sm font-bold text-red-600 uppercase tracking-[0.4em]">Registros Visuales</h3>
+                <div class="h-[1px] flex-grow bg-red-900/50"></div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div class="md:col-span-2 glass-panel p-2 rounded-sm">
+                    <div class="video-container">
+                        <iframe src="https://youtu.be/2oad7AX7gWM" frameborder="0" allowfullscreen></iframe>
+                    </div>
+                    <p class="mt-2 text-[10px] uppercase tracking-widest p-2 text-white italic">Último Raideo Registrado // Operación NWAF</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="foro" class="max-w-4xl mx-auto mb-24">
+            <div class="flex items-center space-x-4 mb-8">
+                <div class="h-[1px] flex-grow bg-red-900/50"></div>
+                <h3 class="text-sm font-bold text-red-600 uppercase tracking-[0.4em]">Terminal de Inteligencia</h3>
+                <div class="h-[1px] flex-grow bg-red-900/50"></div>
+            </div>
+            
+            <div class="glass-panel p-10 rounded-sm border border-red-900/20 text-center relative overflow-hidden">
+                <div class="absolute inset-0 opacity-10 pointer-events-none">
+                    <div class="w-full h-full border border-red-900 rounded-full animate-ping"></div>
+                </div>
+
+                <div class="relative z-10">
+                    <h4 class="text-white font-bold text-lg mb-2 uppercase tracking-tighter">Acceso a Base de Datos de Objetivos</h4>
+                    <p class="text-zinc-500 text-xs mb-8 uppercase tracking-widest italic">
+                        Cargue el tablero para reportar bases, votar próximos raideos y subir pruebas visuales.
+                    </p>
+                    
+                    <div class="flex flex-col md:flex-row justify-center gap-4">
+                        <a href="https://trello.com/b/5oWiZg9Z/inteligencia-hidra" target="_blank" class="bg-red-900/20 hover:bg-red-800 border border-red-600 text-white px-8 py-4 rounded-sm font-bold uppercase text-[10px] tracking-[0.3em] transition-all shadow-[0_0_20px_rgba(153,27,27,0.2)]">
+                            Abrir Tablero de Votos
+                        </a>
+                        
+                        <a href="https://imgur.com/upload" target="_blank" class="bg-zinc-900 hover:bg-zinc-800 border border-zinc-700 text-zinc-300 px-8 py-4 rounded-sm font-bold uppercase text-[10px] tracking-[0.3em] transition-all">
+                            Subir Pruebas Visuales
+                        </a>
+                    </div>
+                    
+                    <p class="mt-8 text-[9px] text-red-900 font-mono animate-pulse">
+                        [ TRANSMISIÓN ENCRIPTADA - ESPERANDO DATOS DE CAMPO ]
+                    </p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="p-20 text-center">
+        <p class="text-zinc-700 text-[9px] tracking-[0.8em] uppercase mb-4">Chernarus no perdona</p>
+        <div class="w-10 h-10 border border-zinc-800 mx-auto rotate-45 flex items-center justify-center">
+            <div class="w-2 h-2 bg-red-900"></div>
+        </div>
+    </footer>
+
+    <script>
+        function entrarZonaHidra() {
+            const pass = prompt("CÓDIGO DE ENCRIPTACIÓN HIDRA:");
+            if (pass === "HIDRA2024") {
+                window.location.href = "privado.html"; 
+            } else if (pass !== null) {
+                alert("ERROR: ACCESO NO AUTORIZADO");
+            }
+        }
+    </script>
+</body>
+</html>

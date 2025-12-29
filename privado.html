@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HIDRA - ARCHIVOS CLASIFICADOS</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* Estilo para el Loader */
+        #loader {
+            background-color: #050505;
+            position: fixed;
+            inset: 0;
+            z-index: 9999;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            font-family: monospace;
+        }
+        .scanline {
+            width: 100%;
+            height: 2px;
+            background: rgba(255, 0, 0, 0.1);
+            position: absolute;
+            animation: move 3s linear infinite;
+        }
+        @keyframes move {
+            0% { top: 0; }
+            100% { top: 100%; }
+        }
+    </style>
+</head>
+<body class="bg-[#0f0f0f] text-gray-200 font-mono overflow-hidden" id="main-body">
+
+    <div id="loader">
+        <div class="scanline"></div>
+        <div class="text-red-600 text-lg mb-4 tracking-[0.5em] animate-pulse uppercase font-bold">
+            Iniciando Protocolo Hidra...
+        </div>
+        <div id="loading-text" class="text-zinc-500 text-[10px] uppercase tracking-widest leading-loose">
+            > Accediendo a satélite local...<br>
+            > Encriptando túnel VPN...<br>
+            > Sincronizando iZurvive Chernarus+...
+        </div>
+        <div class="mt-6 w-48 h-1 bg-zinc-900 overflow-hidden relative">
+            <div class="absolute h-full bg-red-700 animate-[loading_3s_ease-in-out]"></div>
+        </div>
+    </div>
+
+    <div id="content" class="opacity-0 transition-opacity duration-1000">
+        <div class="bg-red-900/20 border-b border-red-600 p-4 text-center">
+            <h1 class="text-red-500 font-bold tracking-[0.3em] uppercase animate-pulse">
+                ● ACCESO RESTRINGIDO - SOLO PERSONAL HIDRA ●
+            </h1>
+        </div>
+
+        <nav class="p-6">
+            <a href="index.html" class="text-zinc-500 hover:text-white transition text-sm">← VOLVER AL RADAR PÚBLICO</a>
+        </nav>
+
+        <main class="container mx-auto px-6 pb-12">
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                
+                <div class="lg:col-span-2 space-y-8">
+                    <section class="bg-zinc-900 border border-zinc-800 p-6 rounded shadow-2xl">
+                        <div class="flex justify-between items-center border-b border-zinc-800 pb-2 mb-4">
+                            <h2 class="text-xl font-bold text-red-600 uppercase italic font-sans">Mapa de Operaciones</h2>
+                            <span class="text-[10px] text-green-600 animate-pulse uppercase tracking-widest">● Satélite Sincronizado</span>
+                        </div>
+                        
+                        <div class="aspect-video w-full bg-black rounded overflow-hidden border border-zinc-800 relative shadow-inner">
+                            <iframe 
+                                src="https://www.izurvive.com/chernarusplus/" 
+                                class="w-full h-full border-0 opacity-80 hover:opacity-100 transition-opacity"
+                                allow="geolocation"
+                                loading="lazy">
+                            </iframe>
+                        </div>
+                    </section>
+
+                    <section class="bg-zinc-900 border border-zinc-800 p-6 rounded shadow-2xl">
+                        <h2 class="text-xl font-bold text-red-600 border-b border-zinc-800 pb-2 mb-4 uppercase italic font-sans">Próximos Raideos / Eventos</h2>
+                        <div class="space-y-4">
+                            <div class="flex justify-between items-center border-l-2 border-yellow-500 pl-4 bg-zinc-800/30 p-3">
+                                <div>
+                                    <p class="font-bold">RAID BASE NOROESTE</p>
+                                    <p class="text-xs text-zinc-400 font-mono italic">> Objetivo: Munición y Explosivos</p>
+                                </div>
+                                <span class="text-yellow-500 font-bold text-sm">VIERNES 22:00</span>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+
+                <div class="space-y-8">
+                    <section class="bg-zinc-900 border border-zinc-800 p-6 rounded shadow-2xl">
+                        <h2 class="text-xl font-bold text-white border-b border-zinc-800 pb-2 mb-4 uppercase italic font-sans">Códigos Actuales</h2>
+                        <div class="space-y-3 font-mono">
+                            <div class="flex justify-between">
+                                <span class="text-zinc-500 text-xs">Puerta Principal:</span>
+                                <span class="text-red-400">[ 4592 ]</span>
+                            </div>
+                            <div class="flex justify-between">
+                                <span class="text-zinc-500 text-xs">Almacén Armas:</span>
+                                <span class="text-red-400">[ 1010 ]</span>
+                            </div>
+                            <div class="mt-4 pt-2 border-t border-zinc-800 flex justify-between">
+                                <span class="text-[10px] text-zinc-600 uppercase">Estado: Actualizado</span>
+                            </div>
+                        </div>
+                    </section>
+
+                    <section class="bg-zinc-900 border border-zinc-800 p-6 rounded shadow-2xl">
+                        <h2 class="text-xl font-bold text-white border-b border-zinc-800 pb-2 mb-4 uppercase italic font-sans text-xs">Miembros Activos</h2>
+                        <ul class="text-sm space-y-2">
+                            <li class="flex items-center text-xs"><span class="w-1.5 h-1.5 bg-green-500 rounded-full mr-2 shadow-[0_0_5px_green]"></span> Hidra_Leader</li>
+                            <li class="flex items-center text-xs"><span class="w-1.5 h-1.5 bg-green-500 rounded-full mr-2 shadow-[0_0_5px_green]"></span> Grek_Hidra</li>
+                            <li class="flex items-center text-xs"><span class="w-1.5 h-1.5 bg-zinc-600 rounded-full mr-2"></span> Miembro_3 (Offline)</li>
+                        </ul>
+                    </section>
+                </div>
+            </div>
+        </main>
+
+        <footer class="text-center p-10 text-[9px] text-zinc-700 tracking-[0.5em] font-mono">
+            SISTEMA DE ENCRIPTACIÓN HIDRA-NET V2.0 // NO LOGS RECORDED
+        </footer>
+    </div>
+
+    <script>
+        window.addEventListener('load', () => {
+            // Simulamos una carga de 3 segundos
+            setTimeout(() => {
+                const loader = document.getElementById('loader');
+                const content = document.getElementById('content');
+                const body = document.getElementById('main-body');
+
+                loader.style.display = 'none'; // Escondemos el cargador
+                content.classList.remove('opacity-0'); // Mostramos la web suavemente
+                body.style.overflow = 'auto'; // Devolvemos el scroll
+            }, 3000); 
+        });
+
+        // Animación de texto personalizada en el loader
+        const texts = [
+            "> Localizando Chernarus NW...",
+            "> Sincronizando iZurvive...",
+            "> Desencriptando base de datos...",
+            "> ACCESO CONCEDIDO."
+        ];
+        let i = 0;
+        const loadingText = document.getElementById('loading-text');
+        setInterval(() => {
+            if(i < texts.length) {
+                loadingText.innerHTML += `<br> ${texts[i]}`;
+                i++;
+            }
+        }, 700);
+    </script>
+
+    <style>
+        @keyframes loading {
+            0% { width: 0%; }
+            100% { width: 100%; }
+        }
+    </style>
+</body>
+</html>
