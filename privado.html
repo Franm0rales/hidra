@@ -94,33 +94,52 @@
                 </div>
 
                 <div class="space-y-8">
-                    <section class="bg-zinc-900 border border-zinc-800 p-6 rounded shadow-2xl">
+<section class="bg-zinc-900 border border-zinc-800 p-6 rounded shadow-2xl">
     <h2 class="text-xl font-bold text-white border-b border-zinc-800 pb-2 mb-4 uppercase italic font-sans">
         Códigos Actuales
     </h2>
 
-    <div class="space-y-3 font-mono">
+    <div class="space-y-4 font-mono">
+
+        <!-- Puerta Principal -->
         <div class="flex justify-between items-center">
             <span class="text-zinc-500 text-xs">Puerta Principal:</span>
-            <input
-                id="code-door"
-                type="text"
-                class="bg-transparent text-red-400 text-right w-24 outline-none border-b border-dashed border-red-700 focus:border-red-500"
-                value="[ 49992 ]">
+
+            <div class="flex items-center gap-2">
+                <input
+                    id="code-door"
+                    type="text"
+                    data-key="hidra_door_code"
+                    class="bg-transparent text-red-400 text-right w-24 outline-none border-none pointer-events-none select-none"
+                    value="[ 4592 ]">
+
+                <button class="edit-btn text-zinc-500 hover:text-red-500 transition">🖊️</button>
+                <button class="save-btn text-green-500 hover:text-green-400 hidden">✔</button>
+                <button class="cancel-btn text-red-500 hover:text-red-400 hidden">✖</button>
+            </div>
         </div>
 
+        <!-- Almacén Armas -->
         <div class="flex justify-between items-center">
             <span class="text-zinc-500 text-xs">Almacén Armas:</span>
-            <input
-                id="code-storage"
-                type="text"
-                class="bg-transparent text-red-400 text-right w-24 outline-none border-b border-dashed border-red-700 focus:border-red-500"
-                value="[ 1010 ]">
+
+            <div class="flex items-center gap-2">
+                <input
+                    id="code-storage"
+                    type="text"
+                    data-key="hidra_storage_code"
+                    class="bg-transparent text-red-400 text-right w-24 outline-none border-none pointer-events-none select-none"
+                    value="[ 1010 ]">
+
+                <button class="edit-btn text-zinc-500 hover:text-red-500 transition">🖊️</button>
+                <button class="save-btn text-green-500 hover:text-green-400 hidden">✔</button>
+                <button class="cancel-btn text-red-500 hover:text-red-400 hidden">✖</button>
+            </div>
         </div>
 
         <div class="mt-4 pt-2 border-t border-zinc-800 flex justify-between">
             <span class="text-[10px] text-zinc-600 uppercase">
-                Estado: Guardado Local
+                Estado: Seguro
             </span>
         </div>
     </div>
@@ -174,20 +193,66 @@
         }, 700);
     </script>
 <script>
-    const door = document.getElementById('code-door');
-    const storage = document.getElementById('code-storage');
+    document.querySelectorAll('.edit-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+            const container = btn.parentElement;
+            const input = container.querySelector('input');
+            const save = container.querySelector('.save-btn');
+            const cancel = container.querySelector('.cancel-btn');
 
-    // Cargar códigos guardados
-    door.value = localStorage.getItem('hidra_door_code') || door.value;
-    storage.value = localStorage.getItem('hidra_storage_code') || storage.value;
+            input.dataset.original = input.value;
 
-    // Guardar automáticamente al editar
-    door.addEventListener('input', () => {
-        localStorage.setItem('hidra_door_code', door.value);
+            input.classList.remove('pointer-events-none', 'select-none');
+            input.focus();
+            input.select();
+
+            btn.classList.add('hidden');
+            save.classList.remove('hidden');
+            cancel.classList.remove('hidden');
+        });
     });
 
-    storage.addEventListener('input', () => {
-        localStorage.setItem('hidra_storage_code', storage.value);
+    document.querySelectorAll('.save-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+            const container = btn.parentElement;
+            const input = container.querySelector('input');
+
+            localStorage.setItem(input.dataset.key, input.value);
+
+            lockInput(container);
+        });
+    });
+
+    document.querySelectorAll('.cancel-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+            const container = btn.parentElement;
+            const input = container.querySelector('input');
+
+            input.value = input.dataset.original;
+
+            lockInput(container);
+        });
+    });
+
+    function lockInput(container) {
+        const input = container.querySelector('input');
+        const edit = container.querySelector('.edit-btn');
+        const save = container.querySelector('.save-btn');
+        const cancel = container.querySelector('.cancel-btn');
+
+        input.classList.add('pointer-events-none', 'select-none');
+
+        edit.classList.remove('hidden');
+        save.classList.add('hidden');
+        cancel.classList.add('hidden');
+    }
+
+    // Cargar valores guardados
+    window.addEventListener('DOMContentLoaded', () => {
+        document.querySelectorAll('input[data-key]').forEach(input => {
+            const saved = localStorage.getItem(input.dataset.key);
+            if (saved) input.value = saved;
+        });
     });
 </script>
 
@@ -198,5 +263,4 @@
         }
     </style>
 </body>
-
 </html>
